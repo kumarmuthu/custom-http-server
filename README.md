@@ -71,12 +71,6 @@ http://<your-ip>/
 
 ---
 
-Then restart:
-
-```bash
-sudo systemctl restart custom-http-server
-```
-
 Check service status to confirm it's running properly:
 
 ```bash
@@ -88,6 +82,57 @@ sudo systemctl status custom-http-server
 ```bash
 sudo journalctl -u custom-http-server -f
 ```
+
+---
+
+## Open Port 80 for Web Access
+
+### On **Rocky Linux** (uses `firewalld`):
+
+```bash
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --reload
+```
+
+**Verify the port is open:**
+
+```bash
+sudo firewall-cmd --list-ports
+```
+
+---
+
+### On **Ubuntu** (typically uses `ufw`):
+
+```bash
+sudo ufw allow 80/tcp
+sudo ufw reload
+```
+
+**Verify UFW status and rules:**
+
+```bash
+sudo ufw status
+```
+
+Or:
+
+```bash
+sudo ufw show
+```
+
+> **Note:** `firewalld` is not installed by default on Ubuntu. It usually uses `ufw` (Uncomplicated Firewall).
+
+---
+
+## Uninstall:
+  To completely remove the HTTP server:
+  ```bash
+  cd custom-http-server/custom-http-server
+  sudo ./uninstall.sh
+  ```
+
+---
 
 ## ✅ Final Notes
 - Built entirely in **Python 3** (no external dependencies)
