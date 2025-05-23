@@ -19,6 +19,7 @@ import argparse
 
 # Custom MIME types
 mimetypes.add_type('text/plain', '.log')
+mimetypes.add_type('text/plain', '.txt')
 mimetypes.add_type('text/plain', '.tap')
 mimetypes.add_type('application/xml', '.xml')
 mimetypes.add_type('text/html', '.html')
@@ -29,6 +30,12 @@ class CustomHandler(SimpleHTTPRequestHandler):
     def guess_type(self, path):
         base, ext = os.path.splitext(path)
         return mimetypes.types_map.get(ext, 'application/octet-stream') if ext else 'text/plain'
+    
+    def end_headers(self):
+    if self.path.endswith(('.log', '.txt', '.tap', '.xml')):
+        self.send_header('Content-Disposition', 'inline')
+    super().end_headers()
+
 
 
 if __name__ == '__main__':
