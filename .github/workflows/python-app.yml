@@ -23,10 +23,9 @@ jobs:
         python-version: '3.x'
 
     - name: Run server with --path . on port 8080
-      working-directory: ./custom_http_server
       run: |
         echo "Launching server with --path . on port 8080"
-        python3 server.py --path . --port 8080 &
+        python3 custom_http_server.py --path . --port 8080 &
         SERVER_PID=$!
         sleep 3
         echo "Requesting root path..."
@@ -34,13 +33,12 @@ jobs:
         kill $SERVER_PID
 
     - name: Run server with --path /tmp on port 8081
-      working-directory: ./custom_http_server
       run: |
         echo "Creating dummy file in /tmp"
         echo "Hello from /tmp" > /tmp/test.txt
 
         echo "Launching server with --path /tmp on port 8081"
-        python3 server.py --path /tmp --port 8081 &
+        python3 custom_http_server.py --path /tmp --port 8081 &
         SERVER_PID=$!
         sleep 3
         echo "Requesting /test.txt..."
