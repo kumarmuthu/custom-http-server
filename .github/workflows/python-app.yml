@@ -1,0 +1,46 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Run server with --path .
+      run: |
+        echo "Launching server with --path . on port 8080"
+        python3 custom_http_server/server.py --path . --port 8080 &
+        SERVER_PID=$!
+        sleep 3
+        echo "Requesting root path..."
+        curl --fail http://localhost:8080
+        kill $SERVER_PID
+
+    - name: Run server with --path /tmp
+      run: |
+        echo "Creating dummy file in /tmp"
+        echo "Hello from /tmp" > /tmp/test.txt
+
+        echo "Launching server with --path /tmp on port 8081"
+        python3 custom_http_server/server.py --path /tmp --port 8081 &
+        SERVER_PID=$!
+        sleep 3
+        echo "Requesting /test.txt..."
+        curl --fail http://localhost:8081/test.txt
+        kill $SERVER_PID
