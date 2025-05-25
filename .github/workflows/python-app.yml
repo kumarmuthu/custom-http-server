@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test-server:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,7 @@ jobs:
         python-version: '3.x'
 
     - name: Run server with --path . on port 8080
+      working-directory: ./custom-http-server
       run: |
         echo "Launching server with --path . on port 8080"
         python3 custom_http_server.py --path . --port 8080 &
@@ -33,6 +34,7 @@ jobs:
         kill $SERVER_PID
 
     - name: Run server with --path /tmp on port 8081
+      working-directory: ./custom-http-server
       run: |
         echo "Creating dummy file in /tmp"
         echo "Hello from /tmp" > /tmp/test.txt
