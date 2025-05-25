@@ -1,0 +1,14 @@
+[Unit]
+Description=Custom HTTP Server
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/custom-http-server.conf
+ExecStart=/usr/bin/python3 /opt/custom_http_server/custom_http_server.py --path=${SERVE_PATH} --port=${SERVE_PORT}
+WorkingDirectory=/opt/custom_http_server
+Restart=on-failure
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
