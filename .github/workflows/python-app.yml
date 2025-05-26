@@ -22,10 +22,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python on Ubuntu
+        if: startsWith(matrix.os, 'ubuntu')
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+
+      - name: Set up Python on Rocky Linux
+        if: startsWith(matrix.os, 'rockylinux')
+        run: |
+          sudo dnf install -y python3 curl
+          python3 --version
 
       - name: Run server with --path . on port 8080
         working-directory: ./custom-http-server
@@ -35,7 +42,7 @@ jobs:
           SERVER_PID=$!
           sleep 3
           echo "Requesting root path..."
-          curl --fail http://localhost:8080
+          curl --fail http://127.0.0.1:8080
           kill $SERVER_PID
 
       - name: Run server with --path /tmp on port 8081
@@ -49,5 +56,5 @@ jobs:
           SERVER_PID=$!
           sleep 3
           echo "Requesting /test.txt..."
-          curl --fail http://localhost:8081/test.txt
+          curl --fail http://127.0.0.1:8081/test.txt
           kill $SERVER_PID
