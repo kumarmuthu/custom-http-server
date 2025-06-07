@@ -1,5 +1,9 @@
 # Custom HTTP Server
 
+![Python](https://img.shields.io/badge/python-3.x-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-linux-lightgrey.svg)
+
 A lightweight, Python-based **Custom HTTP Server** that runs as a Linux systemd service. This project is ideal for serving static files, logs, test results, or building RESTful APIs with no external dependencies.
 
 This is a minimal yet powerful **custom HTTP server** written in pure Python. It includes MIME-type awareness and seamless systemd integration for automatic startup.
