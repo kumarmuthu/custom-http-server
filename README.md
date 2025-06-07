@@ -1,6 +1,8 @@
 # Custom HTTP Server
 
-A minimal, MIME-aware Python HTTP server with systemd integration.
+A lightweight, Python-based **Custom HTTP Server** that runs as a Linux systemd service. This project is ideal for serving static files, logs, test results, or building RESTful APIs with no external dependencies.
+
+This is a minimal yet powerful **custom HTTP server** written in pure Python. It includes MIME-type awareness and seamless systemd integration for automatic startup.
 
 ## Features
 
@@ -8,7 +10,6 @@ A minimal, MIME-aware Python HTTP server with systemd integration.
 - Serves any directory (configured via `/etc/custom-http-server.conf`)
 - Auto-starts on boot
 - MIME types for `.log`, `.tap`, `.xml`, `.html`
-- Written in pure Python using `http.server`
 
 ## Installation
 
