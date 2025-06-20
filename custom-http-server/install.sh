@@ -35,9 +35,12 @@ if [[ "$OS_NAME" == "Linux" ]]; then
     echo "Logs: sudo journalctl -u custom-http-server -f"
 
 elif [[ "$OS_NAME" == "Darwin" ]]; then
-    echo "✅ Installed on macOS."
-    echo "To run manually: python3 $TARGET_DIR/custom_http_server.py"
-    echo "To make it a service, create a launchd plist manually."
+    echo "Note: macOS does not support automatic install/uninstall like Linux (systemd)."
+    echo "⚠️ To run manually:"
+    echo "   python3 $TARGET_DIR/custom_http_server.py --path /Users/<your-username> --port <your-port>"
+    echo "Replace <your-username> with your actual macOS username."
+    echo "Choose a port that's not already in use (e.g., 8080, 8888, 3000, etc.)."
+    echo "To make it a background service, create a launchd plist manually."
 
 else
     echo "❌ Unsupported OS: $OS_NAME"
