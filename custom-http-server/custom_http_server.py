@@ -80,7 +80,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     import os
-    import pwd
+    import platform
     import getpass
     import argparse
 
@@ -91,9 +91,14 @@ if __name__ == '__main__':
         parser.add_argument('--port', type=int, default=80, help='Port number')
         args = parser.parse_args()
 
-        actual_user = os.environ.get("SUDO_USER") or getpass.getuser()
-        user = actual_user or os.getlogin()
-        user_home = pwd.getpwnam(user).pw_dir
+        if platform.system() == "Windows":
+            user_home = os.path.expanduser("~")
+        else:
+            import pwd
+
+            actual_user = os.environ.get("SUDO_USER") or getpass.getuser()
+            user = actual_user or os.getlogin()
+            user_home = pwd.getpwnam(user).pw_dir
 
         # Fallback if path not passed
         serve_path = args.path or user_home
