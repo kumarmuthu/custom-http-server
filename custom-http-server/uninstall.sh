@@ -45,6 +45,9 @@ elif [[ "$OS_NAME" == "Darwin" ]]; then
   sudo rm -f "$TARGET_DIR/custom_http_server.py" || true
   sudo rm -f "$CONFIG_PATH" || true
 
+  echo "Removing empty custom_http_server dir if exists..."
+  sudo rmdir "$TARGET_DIR" 2>/dev/null || true
+
   echo "Cleaning up log files..."
   rm -f /tmp/custom_httpserver.log /tmp/custom_httpserver.err || true
 
