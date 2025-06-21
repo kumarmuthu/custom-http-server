@@ -43,7 +43,7 @@ elif [[ "$OS_NAME" == "Darwin" ]]; then
   fi
 
   echo "Verifying removal..."
-  launchctl list | grep custom_http_server || echo "Service fully removed."
+  launchctl list | grep custom_httpserver || echo "Service fully removed."
 
   echo "Uninstall complete on macOS."
 
