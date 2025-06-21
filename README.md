@@ -53,6 +53,7 @@ cd custom-http-server/custom-http-server
 chmod +x install.sh uninstall.sh
 sudo ./install.sh
 ```
+> 🛡️ **Note:** `sudo` is required to install files in system paths like `/opt` or `/usr/local`.
 
 ---
 
@@ -131,6 +132,8 @@ cd custom-http-server/custom-http-server
 sudo ./uninstall.sh
 ```
 
+> 🛡️ **Note:** `sudo` is required to remove system files and services.
+
 ---
 
 ## 🍏 macOS Installation (launchd Agent)
@@ -144,6 +147,8 @@ chmod +x install.sh uninstall.sh macos-launchd-setup.sh
 ```bash
 sudo ./install.sh -path /Users/<username> -port 8080
 ```
+
+> 🛡️ **Note:** `sudo` is required to install files in system paths like `/opt` or `/usr/local`.
 
 * `--path` → Directory to serve
 * `--port` → HTTP port to use (e.g., 8080)
@@ -255,6 +260,8 @@ muthukumar@muthukumar custom-http-server %
 cd custom-http-server/custom-http-server
 sudo ./uninstall.sh
 ```
+
+> 🛡️ **Note:** `sudo` is required to remove system files and services.
 
 ---
 
