@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-__version__ = "2025.05.25.01"
+__version__ = "2025.06.21.01"
 __author__ = "Muthukumar Subramanian"
 
 '''
@@ -100,13 +100,19 @@ if __name__ == '__main__':
             user = actual_user or os.getlogin()
             user_home = pwd.getpwnam(user).pw_dir
 
-        # Fallback if path not passed
-        serve_path = args.path or user_home
-        print(f"Resolved serve path:{args.path} {serve_path}")
-
+        serve_path = None
         try:
-            # Expand and validate
-            serve_path = os.path.expanduser(serve_path)
+            # Fallback if path not passed
+            if args.path and str(args.path).strip():
+                serve_path = args.path
+                print(f"Resolved serve path (from args): {serve_path}")
+            elif user_home and user_home.strip():
+                serve_path = user_home
+                print(f"Resolved serve path (from user_home): {serve_path}")
+            else:
+                fallback_user = getpass.getuser()
+                serve_path = os.path.expanduser(f"~{fallback_user}")
+                print(f"Resolved serve path (from current user fallback): {serve_path}")
         except Exception as ValidateErr:
             raise ValueError(f"Invalid path: {serve_path}")
 
@@ -117,7 +123,7 @@ if __name__ == '__main__':
 
         server_address = ('0.0.0.0', args.port)
         httpd = HTTPServer(server_address, CustomHandler)
-        print(f"Serving {args.path} on port {args.port}...")
+        print(f"Serving {serve_path} on port {args.port}...")
         httpd.serve_forever()
     except Exception as Err:
         print(f"Observed exception is: {Err}")
