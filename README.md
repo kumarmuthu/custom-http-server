@@ -160,10 +160,28 @@ Check if service is running:
 launchctl list | grep custom_httpserver
 ```
 
+Validate plist syntax (optional):
+```bash
+plutil ~/Library/LaunchAgents/com.custom.httpserver.plist
+```
+
+Example:
+```
+muthukumar@muthukumar custom-http-server % plutil /Users/muthukumar/Library/LaunchAgents/com.custom_http_server.plist
+/Users/muthukumar/Library/LaunchAgents/com.custom_http_server.plist: OK
+muthukumar@muthukumar custom-http-server % 
+```
+
 Watch logs in real time:
 
 ```bash
 watch "cat /tmp/custom_httpserver.log"
+```
+
+Or using `tail`
+
+```bash
+tail -f /tmp/custom_httpserver.log
 ```
 
 Example `.log` log:
@@ -193,6 +211,12 @@ Or **error** logs:
 
 ```bash
 watch "cat /tmp/custom_httpserver.err"
+```
+
+Or using `tail`
+
+```bash
+tail -f /tmp/custom_httpserver.err
 ```
 
 Example `.err` log:
@@ -225,7 +249,16 @@ muthukumar@muthukumar custom-http-server %
 
 ### ❌ Uninstall (macOS)
 
-Manually remove the background service:
+✅ **Automated (recommended):**
+
+```bash
+cd custom-http-server/custom-http-server
+sudo ./uninstall.sh
+```
+
+---
+
+🛠️ **Manual (if needed):**
 
 ```bash
 launchctl unload ~/Library/LaunchAgents/com.custom_http_server.plist
@@ -233,14 +266,7 @@ rm -f ~/Library/LaunchAgents/com.custom_http_server.plist
 launchctl list | grep custom_httpserver
 ```
 
-✅ Should return nothing `launchctl list | grep custom_httpserver`  
-
-Or use the provided uninstallation script:
-
-```bash
-cd custom-http-server/custom-http-server
-sudo ./uninstall.sh
-```
+✅ The final command `launchctl list | grep custom_httpserver` should return nothing.
 
 ---
 
