@@ -3,6 +3,12 @@
 ![Python](https://img.shields.io/badge/python-3.x-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-linux%20%7C%20macOS-lightgrey.svg)
+[![Build Status](https://github.com/kumarmuthu/custom-http-server/actions/workflows/python-app.yml/badge.svg)](https://github.com/kumarmuthu/custom-http-server/actions/workflows/python-app.yml)
+
+![GitHub Forks](https://img.shields.io/github/forks/kumarmuthu/custom-http-server?style=for-the-badge)
+![GitHub Stars](https://img.shields.io/github/stars/kumarmuthu/custom-http-server?style=for-the-badge)
+![GitHub Contributors](https://img.shields.io/github/contributors/kumarmuthu/custom-http-server?style=for-the-badge)
+
 
 A lightweight, Python-based **Custom HTTP Server** that runs as a **Linux systemd service** or a **macOS `launchd` agent**. Ideal for serving static files, logs, test results, or internal documentation.
 This is a minimal yet powerful **custom HTTP server** written in pure Python. It includes MIME-type awareness and seamless integration with **systemd (Linux)** and **launchd (macOS)** for automatic startup on boot.
@@ -19,6 +25,23 @@ This is a minimal yet powerful **custom HTTP server** written in pure Python. It
   - A **launchd agent** on macOS
 - Runs on startup
 - Configurable via a simple config or plist
+
+---
+
+## Directory Structure
+
+```
+custom-http-server/
+├── custom-http-server/
+│   ├── custom-http-server.service       # systemd unit file (Linux)
+│   ├── custom_http_server.py            # Main HTTP server script
+│   ├── default-config.conf              # Default configuration (path/port)
+│   ├── install.sh                       # Installer script (Linux & macOS)
+│   ├── macos-launchd-setup.sh           # macOS launchd agent setup
+│   └── uninstall.sh                     # Uninstaller script
+├── LICENSE                              # MIT License
+└── README.md                            # Project documentation
+```
 
 ---
 
@@ -116,6 +139,9 @@ sudo ./uninstall.sh
 git clone https://github.com/kumarmuthu/custom-http-server.git
 cd custom-http-server/custom-http-server
 chmod +x install.sh uninstall.sh macos-launchd-setup.sh
+```
+
+```bash
 sudo ./install.sh -path /Users/<username> -port 8080
 ```
 
@@ -204,8 +230,10 @@ Manually remove the background service:
 ```bash
 launchctl unload ~/Library/LaunchAgents/com.custom_http_server.plist
 rm -f ~/Library/LaunchAgents/com.custom_http_server.plist
-launchctl list | grep custom_httpserver  # ✅ Should return nothing
+launchctl list | grep custom_httpserver
 ```
+
+✅ Should return nothing `launchctl list | grep custom_httpserver`  
 
 Or use the provided uninstallation script:
 
