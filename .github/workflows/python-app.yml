@@ -4,14 +4,14 @@
 name: custom-http-server CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 0 1 * *'  # At 00:00 UTC on the 1st of every month
   workflow_dispatch:
-  
+  # push:
+  #  branches: [ "main" ]
+  # pull_request:
+  #  branches: [ "main" ]
+  schedule:
+    - cron: "0 9 1 * *"
+ 
 jobs:
   test-server:
     runs-on: ${{ matrix.os }}
