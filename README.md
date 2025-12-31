@@ -162,12 +162,12 @@ The script installs a `launchd` service and autostarts it.
 Check if service is running:
 
 ```bash
-launchctl list | grep custom_httpserver
+launchctl list | grep custom_http_server
 ```
 
 Validate plist syntax (optional):
 ```bash
-plutil ~/Library/LaunchAgents/com.custom.httpserver.plist
+plutil ~/Library/LaunchAgents/com.custom.http_server.plist
 ```
 
 Example:
@@ -270,10 +270,10 @@ sudo ./uninstall.sh
 ```bash
 launchctl unload ~/Library/LaunchAgents/com.custom_http_server.plist
 rm -f ~/Library/LaunchAgents/com.custom_http_server.plist
-launchctl list | grep custom_httpserver
+launchctl list | grep custom_http_server
 ```
 
-✅ The final command `launchctl list | grep custom_httpserver` should return nothing.
+✅ The final command `launchctl list | grep custom_http_server` should return nothing.
 
 ---
 
