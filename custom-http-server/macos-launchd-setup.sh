@@ -38,7 +38,7 @@ cat > "$PLIST_PATH" <<EOF
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.custom_httpserver.python</string>
+  <string>com.custom_http_server.python</string>
   <key>ProgramArguments</key>
   <array>
     <string>$PYTHON_PATH</string>
