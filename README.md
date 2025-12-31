@@ -167,7 +167,7 @@ launchctl list | grep custom_http_server
 
 Validate plist syntax (optional):
 ```bash
-plutil ~/Library/LaunchAgents/com.custom.http_server.plist
+plutil ~/Library/LaunchAgents/com.custom_http_server.plist
 ```
 
 Example:
