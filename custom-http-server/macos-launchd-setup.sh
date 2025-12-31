@@ -64,4 +64,4 @@ launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl load "$PLIST_PATH"
 
 # Notify user
-echo "✅ Loaded com.custom_httpserver.python service. To verify: launchctl list | grep custom_httpserver"
+echo "✅ Loaded com.custom_httpserver.python service. To verify: launchctl list | grep custom_http_server"
