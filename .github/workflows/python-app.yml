@@ -10,7 +10,8 @@ on:
   # pull_request:
   #  branches: [ "main" ]
   schedule:
-    - cron: "0 9 1 * *"
+    # - cron: "0 9 1 * *"
+    - cron: "0 0 15 * *"  # mid-month run
  
 jobs:
   test-server:
